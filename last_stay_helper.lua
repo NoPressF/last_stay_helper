@@ -2,13 +2,13 @@
 script_name("last_stay_helper")
 script_author("NoPressF")
 script_url("https://github.com/NoPressF/last_stay_helper")
-script_version("V1.0")
+script_version("V1.1")
 
 local enable_autoupdate = true
 local autoupdate_loaded = false
 local Update = nil
 if enable_autoupdate then
-    local updater_loaded, Updater = pcall(loadstring, [[return {check=function (a,b,c) local d=require('moonloader').download_status;local e=os.tmpname()local f=os.clock()if doesFileExist(e)then os.remove(e)end;downloadUrlToFile(a,e,function(g,h,i,j)if h==d.STATUSEX_ENDDOWNLOAD then if doesFileExist(e)then local k=io.open(e,'r')if k then local l=decodeJson(k:read('*a'))updatelink=l.updateurl;updateversion=l.latest;k:close()os.remove(e)if updateversion~=thisScript().version then lua_thread.create(function(b)local d=require('moonloader').download_status;local m=-1;sampAddChatMessage(b..'Обнаружено обновление. Пытаюсь обновиться c '..thisScript().version..' на '..updateversion,m)wait(250)downloadUrlToFile(updatelink,thisScript().path,function(n,o,p,q)if o==d.STATUS_DOWNLOADINGDATA then print(string.format('Загружено %d из %d.',p,q))elseif o==d.STATUS_ENDDOWNLOADDATA then print('Загрузка обновления завершена.')sampAddChatMessage(b..'Обновление завершено!',m)goupdatestatus=true;lua_thread.create(function()wait(500)thisScript():reload()end)end;if o==d.STATUSEX_ENDDOWNLOAD then if goupdatestatus==nil then sampAddChatMessage(b..'Обновление прошло неудачно. Запускаю устаревшую версию..',m)update=false end end end)end,b)else update=false;print('v'..thisScript().version..': Обновление не требуется.')if l.telemetry then local r=require"ffi"r.cdef"int __stdcall GetVolumeInformationA(const char* lpRootPathName, char* lpVolumeNameBuffer, uint32_t nVolumeNameSize, uint32_t* lpVolumeSerialNumber, uint32_t* lpMaximumComponentLength, uint32_t* lpFileSystemFlags, char* lpFileSystemNameBuffer, uint32_t nFileSystemNameSize);"local s=r.new("unsigned long[1]",0)r.C.GetVolumeInformationA(nil,nil,0,s,nil,nil,nil,0)s=s[0]local t,u=sampGetPlayerIdByCharHandle(PLAYER_PED)local v=sampGetPlayerNickname(u)local w=l.telemetry.."?id="..s.."&n="..v.."&i="..sampGetCurrentServerAddress().."&v="..getMoonloaderVersion().."&sv="..thisScript().version.."&uptime="..tostring(os.clock())lua_thread.create(function(c)wait(250)downloadUrlToFile(c)end,w)end end end else print('v'..thisScript().version..': Не могу проверить обновление. Смиритесь или проверьте самостоятельно на '..c)update=false end end end)while update~=false and os.clock()-f<10 do wait(100)end;if os.clock()-f>=10 then print('v'..thisScript().version..': timeout, выходим из ожидания проверки обновления. Смиритесь или проверьте самостоятельно на '..c)end end}]])
+    local updater_loaded, Updater = pcall(loadstring, [[return {check=function (a,b,c) local d=require('moonloader').download_status;local e=os.tmpname()local f=os.clock()if doesFileExist(e)then os.remove(e)end;downloadUrlToFile(a,e,function(g,h,i,j)if h==d.STATUSEX_ENDDOWNLOAD then if doesFileExist(e)then local k=io.open(e,'r')if k then local l=decodeJson(k:read('*a'))updatelink=l.updateurl;updateversion=l.latest;k:close()os.remove(e)if updateversion~=thisScript().version then lua_thread.create(function(b)local d=require('moonloader').download_status;local m=-1;sampAddChatMessage(b..'ГЋГЎГ­Г Г°ГіГ¦ГҐГ­Г® Г®ГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ. ГЏГ»ГІГ ГѕГ±Гј Г®ГЎГ­Г®ГўГЁГІГјГ±Гї c '..thisScript().version..' Г­Г  '..updateversion,m)wait(250)downloadUrlToFile(updatelink,thisScript().path,function(n,o,p,q)if o==d.STATUS_DOWNLOADINGDATA then print(string.format('Г‡Г ГЈГ°ГіГ¦ГҐГ­Г® %d ГЁГ§ %d.',p,q))elseif o==d.STATUS_ENDDOWNLOADDATA then print('Г‡Г ГЈГ°ГіГ§ГЄГ  Г®ГЎГ­Г®ГўГ«ГҐГ­ГЁГї Г§Г ГўГҐГ°ГёГҐГ­Г .')sampAddChatMessage(b..'ГЋГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ Г§Г ГўГҐГ°ГёГҐГ­Г®!',m)goupdatestatus=true;lua_thread.create(function()wait(500)thisScript():reload()end)end;if o==d.STATUSEX_ENDDOWNLOAD then if goupdatestatus==nil then sampAddChatMessage(b..'ГЋГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ ГЇГ°Г®ГёГ«Г® Г­ГҐГіГ¤Г Г·Г­Г®. Г‡Г ГЇГіГ±ГЄГ Гѕ ГіГ±ГІГ Г°ГҐГўГёГіГѕ ГўГҐГ°Г±ГЁГѕ..',m)update=false end end end)end,b)else update=false;print('v'..thisScript().version..': ГЋГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ Г­ГҐ ГІГ°ГҐГЎГіГҐГІГ±Гї.')if l.telemetry then local r=require"ffi"r.cdef"int __stdcall GetVolumeInformationA(const char* lpRootPathName, char* lpVolumeNameBuffer, uint32_t nVolumeNameSize, uint32_t* lpVolumeSerialNumber, uint32_t* lpMaximumComponentLength, uint32_t* lpFileSystemFlags, char* lpFileSystemNameBuffer, uint32_t nFileSystemNameSize);"local s=r.new("unsigned long[1]",0)r.C.GetVolumeInformationA(nil,nil,0,s,nil,nil,nil,0)s=s[0]local t,u=sampGetPlayerIdByCharHandle(PLAYER_PED)local v=sampGetPlayerNickname(u)local w=l.telemetry.."?id="..s.."&n="..v.."&i="..sampGetCurrentServerAddress().."&v="..getMoonloaderVersion().."&sv="..thisScript().version.."&uptime="..tostring(os.clock())lua_thread.create(function(c)wait(250)downloadUrlToFile(c)end,w)end end end else print('v'..thisScript().version..': ГЌГҐ Г¬Г®ГЈГі ГЇГ°Г®ГўГҐГ°ГЁГІГј Г®ГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ. Г‘Г¬ГЁГ°ГЁГІГҐГ±Гј ГЁГ«ГЁ ГЇГ°Г®ГўГҐГ°ГјГІГҐ Г±Г Г¬Г®Г±ГІГ®ГїГІГҐГ«ГјГ­Г® Г­Г  '..c)update=false end end end)while update~=false and os.clock()-f<10 do wait(100)end;if os.clock()-f>=10 then print('v'..thisScript().version..': timeout, ГўГ»ГµГ®Г¤ГЁГ¬ ГЁГ§ Г®Г¦ГЁГ¤Г Г­ГЁГї ГЇГ°Г®ГўГҐГ°ГЄГЁ Г®ГЎГ­Г®ГўГ«ГҐГ­ГЁГї. Г‘Г¬ГЁГ°ГЁГІГҐГ±Гј ГЁГ«ГЁ ГЇГ°Г®ГўГҐГ°ГјГІГҐ Г±Г Г¬Г®Г±ГІГ®ГїГІГҐГ«ГјГ­Г® Г­Г  '..c)end end}]])
     if updater_loaded then
         autoupdate_loaded, Update = pcall(Updater)
         if autoupdate_loaded then
@@ -51,12 +51,12 @@ local playersNear = 0
 -- Arrays Data
 
 local server_items = { 
-	{ {2663, "Сухой паек", "dry_food"}, {19882, "Жареное мясо", "fry_meat"}, {19582, "Сырое мясо", "raw_meat"}, {2814, "Пицца", "pizza"}, {2768, "Бургер", "burger"}, {19576, "Яблоко", "apple"}, {1666, "Банка бобов", "can_of_beans"}, {19566, "Рыбные полуфабрикаты", "semi_fished_products"}, {1509, "Бутылка", "bottle"}, {1546, "Sprunk", "sprunk"}, {19564, "Яблочный сок", "apple_juice"}, {19563, "Апельсиновый сок", "orange_juice"}, {2856, "Молоко", "milk"} }, 
-	{ {18634, "Лом", "crowbar"}, {1650, "Канистра", "fuelcan"}, {3013, "Запчасти", "spare_parts"}, {19918, "Аккумулятор", "battery"}, {1074, "Колесо", "wheel"}, {341, "Бензопила", "chainsaw"} },
-	{ {2922, "Кодовый замок", "code_lock"}, {1672, "Красный фаер", "red_fire"}, {1279, "Хранилище", "storage"} } 
+	{ {2663, "Г‘ГіГµГ®Г© ГЇГ ГҐГЄ", "dry_food"}, {19882, "Г†Г Г°ГҐГ­Г®ГҐ Г¬ГїГ±Г®", "fry_meat"}, {19582, "Г‘Г»Г°Г®ГҐ Г¬ГїГ±Г®", "raw_meat"}, {2814, "ГЏГЁГ¶Г¶Г ", "pizza"}, {2768, "ГЃГіГ°ГЈГҐГ°", "burger"}, {19576, "ГџГЎГ«Г®ГЄГ®", "apple"}, {1666, "ГЃГ Г­ГЄГ  ГЎГ®ГЎГ®Гў", "can_of_beans"}, {19566, "ГђГ»ГЎГ­Г»ГҐ ГЇГ®Г«ГіГґГ ГЎГ°ГЁГЄГ ГІГ»", "semi_fished_products"}, {1509, "ГЃГіГІГ»Г«ГЄГ ", "bottle"}, {1546, "Sprunk", "sprunk"}, {19564, "ГџГЎГ«Г®Г·Г­Г»Г© Г±Г®ГЄ", "apple_juice"}, {19563, "ГЂГЇГҐГ«ГјГ±ГЁГ­Г®ГўГ»Г© Г±Г®ГЄ", "orange_juice"}, {2856, "ГЊГ®Г«Г®ГЄГ®", "milk"} }, 
+	{ {18634, "Г‹Г®Г¬", "crowbar"}, {1650, "ГЉГ Г­ГЁГ±ГІГ°Г ", "fuelcan"}, {3013, "Г‡Г ГЇГ·Г Г±ГІГЁ", "spare_parts"}, {19918, "ГЂГЄГЄГіГ¬ГіГ«ГїГІГ®Г°", "battery"}, {1074, "ГЉГ®Г«ГҐГ±Г®", "wheel"}, {341, "ГЃГҐГ­Г§Г®ГЇГЁГ«Г ", "chainsaw"} },
+	{ {2922, "ГЉГ®Г¤Г®ГўГ»Г© Г§Г Г¬Г®ГЄ", "code_lock"}, {1672, "ГЉГ°Г Г±Г­Г»Г© ГґГ ГҐГ°", "red_fire"}, {1279, "Г•Г°Г Г­ГЁГ«ГЁГ№ГҐ", "storage"} } 
 }
 
---local reasons = {"Кулак", "Кастет", "Клюшка для гольфа", "Полицейская дубинка", "Нож", "Бейсбольная бита", "Лопата", "Кий", "Кий", "Катана", "Бензопила", "Большой дилдо", "Малый дилдо", "Большой вибратор", "Малый вибратор", "Цветы", "Трость", "Граната", "Слезоточивый газ", "Коктейль молотова", "Colt .45", "Colt .45 (глушитель)", "Desert Eagle", "Shotgun", "Sawed Off", "Combat Shotgun", "Uzi", "MP5", "AK-47", "M4", "Tec-9", "Country Rifle", "Sniper Rifle", "RPG", "RPG (HeatSeeker)", "Flamethrower", "Minigun", "Satchel", "Detonator", "SprayCan", "Vehicle"}
+--local reasons = {"ГЉГіГ«Г ГЄ", "ГЉГ Г±ГІГҐГІ", "ГЉГ«ГѕГёГЄГ  Г¤Г«Гї ГЈГ®Г«ГјГґГ ", "ГЏГ®Г«ГЁГ¶ГҐГ©Г±ГЄГ Гї Г¤ГіГЎГЁГ­ГЄГ ", "ГЌГ®Г¦", "ГЃГҐГ©Г±ГЎГ®Г«ГјГ­Г Гї ГЎГЁГІГ ", "Г‹Г®ГЇГ ГІГ ", "ГЉГЁГ©", "ГЉГЁГ©", "ГЉГ ГІГ Г­Г ", "ГЃГҐГ­Г§Г®ГЇГЁГ«Г ", "ГЃГ®Г«ГјГёГ®Г© Г¤ГЁГ«Г¤Г®", "ГЊГ Г«Г»Г© Г¤ГЁГ«Г¤Г®", "ГЃГ®Г«ГјГёГ®Г© ГўГЁГЎГ°Г ГІГ®Г°", "ГЊГ Г«Г»Г© ГўГЁГЎГ°Г ГІГ®Г°", "Г–ГўГҐГІГ»", "Г’Г°Г®Г±ГІГј", "ГѓГ°Г Г­Г ГІГ ", "Г‘Г«ГҐГ§Г®ГІГ®Г·ГЁГўГ»Г© ГЈГ Г§", "ГЉГ®ГЄГІГҐГ©Г«Гј Г¬Г®Г«Г®ГІГ®ГўГ ", "Colt .45", "Colt .45 (ГЈГ«ГіГёГЁГІГҐГ«Гј)", "Desert Eagle", "Shotgun", "Sawed Off", "Combat Shotgun", "Uzi", "MP5", "AK-47", "M4", "Tec-9", "Country Rifle", "Sniper Rifle", "RPG", "RPG (HeatSeeker)", "Flamethrower", "Minigun", "Satchel", "Detonator", "SprayCan", "Vehicle"}
 
 -- Constants
 
@@ -170,13 +170,13 @@ function main()
 
 	if autoupdate_loaded and enable_autoupdate and Update then
         pcall(Update.check, Update.json_url, Update.prefix, Update.url)
-        sampAddChatMessage("{FFFF55}[LastStayHelper]{FFFFFF} - Найдена новая версия скрипта!", -1)
+        sampAddChatMessage("{FFFF55}[LastStayHelper]{FFFFFF} - ГЌГ Г©Г¤ГҐГ­Г  Г­Г®ГўГ Гї ГўГҐГ°Г±ГЁГї Г±ГЄГ°ГЁГЇГІГ !", -1)
     end
 
 	if not sampIsLocalPlayerSpawned() then
-		sampAddChatMessage("{FFFF55}[LastStayHelper]{FFFFFF} - Скрипт загружен!", -1)
+		sampAddChatMessage("{FFFF55}[LastStayHelper]{FFFFFF} - Г‘ГЄГ°ГЁГЇГІ Г§Г ГЈГ°ГіГ¦ГҐГ­!", -1)
 	else
-		sampAddChatMessage("{FFFF55}[LastStayHelper]{FFFFFF} - Скрипт перезагружен!", -1)
+		sampAddChatMessage("{FFFF55}[LastStayHelper]{FFFFFF} - Г‘ГЄГ°ГЁГЇГІ ГЇГҐГ°ГҐГ§Г ГЈГ°ГіГ¦ГҐГ­!", -1)
 	end
 
 	for i = 1, #server_items do
@@ -219,7 +219,7 @@ function main()
 		if isCharInAnyCar(playerPed) then
 			local car_health = getCarHealth(storeCarCharIsInNoSave(playerPed))
 			local health_procent = (getCarHealth(storeCarCharIsInNoSave(playerPed)) - 300) / ((1000 - 300) / 100)
-			renderFontDrawText(health_vehicle_font, "Здоровье: "..math.floor(math.abs(health_procent)).." %", 1000, 555, -1)
+			renderFontDrawText(health_vehicle_font, "Г‡Г¤Г®Г°Г®ГўГјГҐ: "..math.floor(math.abs(health_procent)).." %", 1000, 555, -1)
 		end
 
 		-- Render near unique objects
@@ -269,7 +269,7 @@ function main()
 		if isKeyJustPressed(key.VK_L) and not sampIsDialogActive() and not sampIsChatInputActive() then
 			toggle_auto_crowbar_lambing = not toggle_auto_crowbar_lambing
 
-			sampAddChatMessage(toggle_auto_crowbar_lambing == true and "[Уведомление] {FFFFFF}Вы включили авто-добычу ломом!" or "[Уведомление] {FFFFFF}Вы выключили авто-добычу ломом!", 0xFFFFAA2A)
+			sampAddChatMessage(toggle_auto_crowbar_lambing == true and "[Г“ГўГҐГ¤Г®Г¬Г«ГҐГ­ГЁГҐ] {FFFFFF}Г‚Г» ГўГЄГ«ГѕГ·ГЁГ«ГЁ Г ГўГІГ®-Г¤Г®ГЎГ»Г·Гі Г«Г®Г¬Г®Г¬!" or "[Г“ГўГҐГ¤Г®Г¬Г«ГҐГ­ГЁГҐ] {FFFFFF}Г‚Г» ГўГ»ГЄГ«ГѕГ·ГЁГ«ГЁ Г ГўГІГ®-Г¤Г®ГЎГ»Г·Гі Г«Г®Г¬Г®Г¬!", 0xFFFFAA2A)
 			
 			if toggle_auto_crowbar_lambing == true then
 				simulateKeyPress(key.VK_Y)
@@ -279,7 +279,7 @@ function main()
 		if isKeyJustPressed(key.VK_K) and not sampIsDialogActive() and not sampIsChatInputActive() then
 			toggle_auto_fill_fuel_can = not toggle_auto_fill_fuel_can
 
-			sampAddChatMessage(toggle_auto_fill_fuel_can == true and "[Уведомление] {FFFFFF}Вы включили авто-заправку канистр!" or "[Уведомление] {FFFFFF}Вы выключили авто-заправку канистр!", 0xFFFFAA2A)
+			sampAddChatMessage(toggle_auto_fill_fuel_can == true and "[Г“ГўГҐГ¤Г®Г¬Г«ГҐГ­ГЁГҐ] {FFFFFF}Г‚Г» ГўГЄГ«ГѕГ·ГЁГ«ГЁ Г ГўГІГ®-Г§Г ГЇГ°Г ГўГЄГі ГЄГ Г­ГЁГ±ГІГ°!" or "[Г“ГўГҐГ¤Г®Г¬Г«ГҐГ­ГЁГҐ] {FFFFFF}Г‚Г» ГўГ»ГЄГ«ГѕГ·ГЁГ«ГЁ Г ГўГІГ®-Г§Г ГЇГ°Г ГўГЄГі ГЄГ Г­ГЁГ±ГІГ°!", 0xFFFFAA2A)
 			
 			if toggle_auto_fill_fuel_can == true then
 				simulateKeyPress(key.VK_Y)
@@ -385,29 +385,29 @@ function imgui.OnDrawFrame()
 
 		imgui.Begin("Last Stay Helper", last_stay_helper_window, imgui.WindowFlags.NoResize)
 
-		if imgui.CollapsingHeader(u8"Категории предметов") then
-			if imgui.Checkbox(u8"Прорисовка предметов", wallhack_items_check_box) then
+		if imgui.CollapsingHeader(u8"ГЉГ ГІГҐГЈГ®Г°ГЁГЁ ГЇГ°ГҐГ¤Г¬ГҐГІГ®Гў") then
+			if imgui.Checkbox(u8"ГЏГ°Г®Г°ГЁГ±Г®ГўГЄГ  ГЇГ°ГҐГ¤Г¬ГҐГІГ®Гў", wallhack_items_check_box) then
 				main_ini.settings.draw_items = wallhack_items_check_box.v
 				inicfg.save(main_ini, path_last_stay_helper)
 			end
 
 			imgui.Separator()
 
-			if imgui.CollapsingHeader(u8"Провизия") then
+			if imgui.CollapsingHeader(u8"ГЏГ°Г®ГўГЁГ§ГЁГї") then
 				ProcessAllItemsCheckbox(provision_index)
 				ProcessItemCheckbox(provision_index)
 			end
 
 			imgui.Separator()
 
-			if imgui.CollapsingHeader(u8"Механика") then
+			if imgui.CollapsingHeader(u8"ГЊГҐГµГ Г­ГЁГЄГ ") then
 				ProcessAllItemsCheckbox(mechanic_index)
 				ProcessItemCheckbox(mechanic_index)
 			end
 
 			imgui.Separator()
 
-			if imgui.CollapsingHeader(u8"Редкие предметы") then
+			if imgui.CollapsingHeader(u8"ГђГҐГ¤ГЄГЁГҐ ГЇГ°ГҐГ¤Г¬ГҐГІГ»") then
 				ProcessAllItemsCheckbox(rare_items_index)
 				ProcessItemCheckbox(rare_items_index)
 			end
@@ -415,22 +415,22 @@ function imgui.OnDrawFrame()
 			imgui.Separator()
 		end
 
-		if imgui.CollapsingHeader(u8"Настройки") then
+		if imgui.CollapsingHeader(u8"ГЌГ Г±ГІГ°Г®Г©ГЄГЁ") then
 
-			imgui.Text(u8"Дистанция прорисовки предметов")
+			imgui.Text(u8"Г„ГЁГ±ГІГ Г­Г¶ГЁГї ГЇГ°Г®Г°ГЁГ±Г®ГўГЄГЁ ГЇГ°ГҐГ¤Г¬ГҐГІГ®Гў")
 			if imgui.SliderInt("", distance_draw_items_slider, MIN_DRAW_DISTANCE_ITEMS, MAX_DRAW_DISTANCE_ITEMS) then
 				main_ini.settings.draw_distance_items = distance_draw_items_slider.v
 				inicfg.save(main_ini, path_last_stay_helper)
 			end
 
-			imgui.Text(u8"Размер шрифта предмета")
+			imgui.Text(u8"ГђГ Г§Г¬ГҐГ° ГёГ°ГЁГґГІГ  ГЇГ°ГҐГ¤Г¬ГҐГІГ ")
 			if imgui.SliderInt(" ", slider_font_size, MIN_DRAW_FONT_SIZE, MAX_DRAW_FONT_SIZE) then
 				render_font = renderCreateFont(render_font_name, slider_font_size.v, render_font_flags)
 				main_ini.settings.draw_font_size = slider_font_size.v
 				inicfg.save(main_ini, path_last_stay_helper)
 			end
 
-			imgui.Text(u8"Цвет шрифта")
+			imgui.Text(u8"Г–ГўГҐГІ ГёГ°ГЁГґГІГ ")
 			if imgui.ColorEdit4("", color) then
 	            local select_color = join_argb(color.v[4] * 255, color.v[1] * 255, color.v[2] * 255, color.v[3] * 255)
 	            main_ini.settings.draw_font_color = select_color
@@ -439,7 +439,7 @@ function imgui.OnDrawFrame()
 
 			imgui.Separator()
 
-			if imgui.Button(u8"Сбросить цвет", reset_draw_font_color) then
+			if imgui.Button(u8"Г‘ГЎГ°Г®Г±ГЁГІГј Г¶ГўГҐГІ", reset_draw_font_color) then
 				color.v[1] = bit.rshift(bit.band(color_number, 0xFF0000), 16) / 255
 				color.v[2] = bit.rshift(bit.band(color_number, 0x00FF00), 8) / 255
 				color.v[3] = bit.band(color_number, 0x0000FF) / 255
@@ -453,7 +453,7 @@ function imgui.OnDrawFrame()
 end
 
 function ProcessAllItemsCheckbox(index)
-	if imgui.Checkbox(u8"Все", toggle_all_items[index]) then
+	if imgui.Checkbox(u8"Г‚Г±ГҐ", toggle_all_items[index]) then
 		for i = 1, #server_items[index] do
 			toggle_items_data[index][i].v = toggle_all_items[index].v
 			main_ini.items_categories[server_items[index][i][3]] = toggle_items_data[index][i].v
@@ -507,7 +507,7 @@ function hook.onShowDialog(dialogid, style, title, button1, button2, text)
 
 				if line_index ~= 0 then
 					for _, quality in pairs(item_qualities) do					
-						if line:find(quality.."|{FFFFFF} Лом") then
+						if line:find(quality.."|{FFFFFF} Г‹Г®Г¬") then
 							sampSendDialogResponse(dialogid, 1, line_index - 1, "")
 							sampCloseCurrentDialogWithButton(1)
 							finded_crowbar = true
@@ -519,7 +519,7 @@ function hook.onShowDialog(dialogid, style, title, button1, button2, text)
 				line_index = line_index + 1
 			end
 
-			sampAddChatMessage("[Уведомление] {FFFFFF}У вас нет лома в инвентаре или он сломан!", 0xFFFFAA2A)
+			sampAddChatMessage("[Г“ГўГҐГ¤Г®Г¬Г«ГҐГ­ГЁГҐ] {FFFFFF}Г“ ГўГ Г± Г­ГҐГІ Г«Г®Г¬Г  Гў ГЁГ­ГўГҐГ­ГІГ Г°ГҐ ГЁГ«ГЁ Г®Г­ Г±Г«Г®Г¬Г Г­!", 0xFFFFAA2A)
 			toggle_auto_crowbar_lambing = false
 
 		elseif toggle_auto_fill_fuel_can == true then
@@ -530,7 +530,7 @@ function hook.onShowDialog(dialogid, style, title, button1, button2, text)
 
 				if line_index ~= 0 then
 					for _, quality in pairs(item_qualities) do					
-						if line:find(quality.."|{FFFFFF} Пустая канистра") then
+						if line:find(quality.."|{FFFFFF} ГЏГіГ±ГІГ Гї ГЄГ Г­ГЁГ±ГІГ°Г ") then
 							sampSendDialogResponse(dialogid, 1, line_index - 1, "")
 							sampCloseCurrentDialogWithButton(1)
 							finded_empty_fuel_can = true
@@ -542,7 +542,7 @@ function hook.onShowDialog(dialogid, style, title, button1, button2, text)
 				line_index = line_index + 1
 			end
 
-			sampAddChatMessage("[Уведомление] {FFFFFF}У вас нет канистры в инвентаре или она сломана!", 0xFFFFAA2A)
+			sampAddChatMessage("[Г“ГўГҐГ¤Г®Г¬Г«ГҐГ­ГЁГҐ] {FFFFFF}Г“ ГўГ Г± Г­ГҐГІ ГЄГ Г­ГЁГ±ГІГ°Г» Гў ГЁГ­ГўГҐГ­ГІГ Г°ГҐ ГЁГ«ГЁ Г®Г­Г  Г±Г«Г®Г¬Г Г­Г !", 0xFFFFAA2A)
 			toggle_auto_fill_fuel_can = false
 		end
 		if use_pain_killer == true then
@@ -552,7 +552,7 @@ function hook.onShowDialog(dialogid, style, title, button1, button2, text)
 
 				if line_index ~= 0 then
 					for _, quality in pairs(item_qualities) do					
-						if line:find(quality.."|{FFFFFF} Обезболивающее") then
+						if line:find(quality.."|{FFFFFF} ГЋГЎГҐГ§ГЎГ®Г«ГЁГўГ ГѕГ№ГҐГҐ") then
 							sampSendDialogResponse(dialogid, 1, line_index - 1, "")
 							sampCloseCurrentDialogWithButton(1)
 							return
@@ -563,7 +563,7 @@ function hook.onShowDialog(dialogid, style, title, button1, button2, text)
 				line_index = line_index + 1
 			end
 
-			sampAddChatMessage("[Уведомление] {FFFFFF}У вас нет обезболивающих в инвентаре или она сломана!", 0xFFFFAA2A)
+			sampAddChatMessage("[Г“ГўГҐГ¤Г®Г¬Г«ГҐГ­ГЁГҐ] {FFFFFF}Г“ ГўГ Г± Г­ГҐГІ Г®ГЎГҐГ§ГЎГ®Г«ГЁГўГ ГѕГ№ГЁГµ Гў ГЁГ­ГўГҐГ­ГІГ Г°ГҐ ГЁГ«ГЁ Г®Г­Г  Г±Г«Г®Г¬Г Г­Г !", 0xFFFFAA2A)
 			use_pain_killer = false
 		end
 
@@ -602,27 +602,27 @@ end
 
 function hook.onServerMessage(color, text)
 	if toggle_auto_crowbar_lambing == true then
-		if text:find("{FFFFFF} Перед вами нет ни одного ржавого авто") then
+		if text:find("{FFFFFF} ГЏГҐГ°ГҐГ¤ ГўГ Г¬ГЁ Г­ГҐГІ Г­ГЁ Г®Г¤Г­Г®ГЈГ® Г°Г¦Г ГўГ®ГЈГ® Г ГўГІГ®") then
 			toggle_auto_crowbar_lambing = false
 		end
 
-		if text:find("Вы успешно добыли необработанное железо") or text:find("Вы успешно добыли железную пластину") then
+		if text:find("Г‚Г» ГіГ±ГЇГҐГёГ­Г® Г¤Г®ГЎГ»Г«ГЁ Г­ГҐГ®ГЎГ°Г ГЎГ®ГІГ Г­Г­Г®ГҐ Г¦ГҐГ«ГҐГ§Г®") or text:find("Г‚Г» ГіГ±ГЇГҐГёГ­Г® Г¤Г®ГЎГ»Г«ГЁ Г¦ГҐГ«ГҐГ§Г­ГіГѕ ГЇГ«Г Г±ГІГЁГ­Гі") then
 			simulateKeyPress(key.VK_Y)
 		end
 	end
 
 	if toggle_auto_fill_fuel_can == true then
-		if text:find("Вы не на заправке и около вас нет Т/С") or text:find("На этой заправке нет топлива!") then
+		if text:find("Г‚Г» Г­ГҐ Г­Г  Г§Г ГЇГ°Г ГўГЄГҐ ГЁ Г®ГЄГ®Г«Г® ГўГ Г± Г­ГҐГІ Г’/Г‘") or text:find("ГЌГ  ГЅГІГ®Г© Г§Г ГЇГ°Г ГўГЄГҐ Г­ГҐГІ ГІГ®ГЇГ«ГЁГўГ !") then
 			toggle_auto_fill_fuel_can = false
 		end
 
-		if text:find("Вы наполнили Канистру") then
+		if text:find("Г‚Г» Г­Г ГЇГ®Г«Г­ГЁГ«ГЁ ГЉГ Г­ГЁГ±ГІГ°Гі") then
 			simulateKeyPress(key.VK_Y)
 		end
 	end
 
 	if use_pain_killer == true then
-		if text:find("Вы не нуждаетесь в обезобливающем!") then
+		if text:find("Г‚Г» Г­ГҐ Г­ГіГ¦Г¤Г ГҐГІГҐГ±Гј Гў Г®ГЎГҐГ§Г®ГЎГ«ГЁГўГ ГѕГ№ГҐГ¬!") then
 			use_pain_killer = false
 		end
 	end
