@@ -1,7 +1,7 @@
 script_name("last_stay_helper")
 script_author("NoPressF")
 script_url("https://github.com/NoPressF/last_stay_helper")
-script_version("V1.1")
+script_version("V1.0")
 
 local enable_autoupdate = true
 local autoupdate_loaded = false
