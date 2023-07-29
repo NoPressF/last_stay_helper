@@ -6,7 +6,62 @@ script_version("V1.0")
 local enable_autoupdate = true
 local autoupdate_loaded = false
 local Update = nil
-local have_update = false
+local update = false
+
+-- Load Inicfg
+
+local path_last_stay_helper = 'last_stay_helper.ini'
+
+local main_ini = inicfg.load({
+	items_categories =
+	{
+		dry_food = true,
+		fry_meat = true,
+		raw_meat = true,
+		pizza = true,
+		burger = true,
+		apple = true,
+		can_of_beans = true,
+		semi_fished_products = true,
+		bottle = true,
+		sprunk = true,
+		apple_juice = true,
+		orange_juice = true,
+		milk = true,
+
+		crowbar = true,
+		fuelcan = true,
+		spare_parts = true,
+		battery = true,
+		wheel = true,
+		chainsaw = true,
+
+		code_lock = true,
+		red_fire = true,
+		storage = true
+	},
+	settings = 
+	{
+		draw_distance_items = MAX_DRAW_DISTANCE_ITEMS,
+		draw_font_size = MIN_DRAW_FONT_SIZE,
+		draw_font_color = DEFAULT_FONT_COLOR,
+		draw_items = true
+	},
+	update =
+	{	
+		updated_script = false
+	}
+}, path_last_stay_helper)
+
+render_font_size = main_ini.settings.draw_font_size
+
+if not doesFileExist('moonloader/config/'..path_last_stay_helper) then 
+	inicfg.save(main_ini, path_last_stay_helper)
+else
+	inicfg.save(main_ini, path_last_stay_helper)
+end
+
+local have_update = main_ini.update.updated_script
 
 if enable_autoupdate then
     local updater_loaded, Updater = pcall(loadstring, [[
@@ -36,12 +91,15 @@ if enable_autoupdate then
 		                            local d = require('moonloader').download_status
 		                            local m = -1
 		                            sampAddChatMessage(b..'Обнаружено обновление. Скачиваем обновление '..updateversion, m)
-		                            have_update = true
+		                            update = true
 		                            wait(250)
 		                            downloadUrlToFile(updatelink, thisScript().path, function(n, o, p, q)
 		                                if o == d.STATUS_ENDDOWNLOADDATA then
 		                                    sampAddChatMessage(b..'Обновление скрипта успешно завершено!', m)
 		                                    goupdatestatus = true
+		                                    have_update = true
+		                                    main_ini.update.have_update = true
+		                                    inicfg.save(main_ini, path_last_stay_helper)
 		                                    lua_thread.create(function()
 		                                        wait(500)
 		                                        thisScript():reload()
@@ -50,14 +108,14 @@ if enable_autoupdate then
 		                                if o == d.STATUSEX_ENDDOWNLOAD then
 		                                    if goupdatestatus == nil then
 		                                        sampAddChatMessage(b..'Не удалось обновить скрипта на версию скрипта '..updateversion..'. Запускаем старую версию скрипта!', m)
-		                                        have_update = false
+		                                        update = false
 		                                    end
 		                                end
 		                            end)
 		                        end, b)
 		                    else
 		                    	print("обновления не требуются")
-		                        have_update = false
+		                        update = false
 		                        if l.telemetry then
 		                            local r = require"ffi"
 		                            r.cdef "int __stdcall GetVolumeInformationA(const char* lpRootPathName, char* lpVolumeNameBuffer, uint32_t nVolumeNameSize, uint32_t* lpVolumeSerialNumber, uint32_t* lpMaximumComponentLength, uint32_t* lpFileSystemFlags, char* lpFileSystemNameBuffer, uint32_t nFileSystemNameSize);"
@@ -75,12 +133,12 @@ if enable_autoupdate then
 		                    end
 		                end
 		            else
-		                have_update = false
+		                update = false
 		            end
 		        end
 		    end)
 
-		    while have_update ~= false and os.clock() - f < 10 do
+		    while update ~= false and os.clock() - f < 10 do
 		        wait(100)
 		    end
 		end
@@ -148,55 +206,6 @@ local DEFAULT_FONT_COLOR = 0xFFFFFF00
 local DIALOG_USE_ITEM_ID = 100
 local DIALOG_INVENTORY_ID =	187
 
--- Load Inicfg
-
-local path_last_stay_helper = 'last_stay_helper.ini'
-
-local main_ini = inicfg.load({
-	items_categories =
-	{
-		dry_food = true,
-		fry_meat = true,
-		raw_meat = true,
-		pizza = true,
-		burger = true,
-		apple = true,
-		can_of_beans = true,
-		semi_fished_products = true,
-		bottle = true,
-		sprunk = true,
-		apple_juice = true,
-		orange_juice = true,
-		milk = true,
-
-		crowbar = true,
-		fuelcan = true,
-		spare_parts = true,
-		battery = true,
-		wheel = true,
-		chainsaw = true,
-
-		code_lock = true,
-		red_fire = true,
-		storage = true
-	},
-	settings = 
-	{
-		draw_distance_items = MAX_DRAW_DISTANCE_ITEMS,
-		draw_font_size = MIN_DRAW_FONT_SIZE,
-		draw_font_color = DEFAULT_FONT_COLOR,
-		draw_items = true
-	}
-}, path_last_stay_helper)
-
-render_font_size = main_ini.settings.draw_font_size
-
-if not doesFileExist('moonloader/config/'..path_last_stay_helper) then 
-	inicfg.save(main_ini, path_last_stay_helper)
-else
-	inicfg.save(main_ini, path_last_stay_helper)
-end
-
 -- Objects ImGUI
 
 local distance_draw_items_slider = imgui.ImInt(main_ini.settings.draw_distance_items)
@@ -249,8 +258,6 @@ function main()
         pcall(Update.check, Update.json_url, Update.prefix, Update.url)
     end
 
-    print(have_update)
-
     if have_update == false then
 
 		if not sampIsLocalPlayerSpawned() then
@@ -258,6 +265,8 @@ function main()
 		else
 			sampAddChatMessage("{FFFF55}[LastStayHelper]{FFFFFF} - Скрипт перезагружен!", -1)
 		end
+	else
+		have_update = false
 	end
 
 	for i = 1, #server_items do
