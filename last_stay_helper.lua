@@ -57,11 +57,7 @@ local main_ini = inicfg.load({
 
 render_font_size = main_ini.settings.draw_font_size
 
-if not doesFileExist('moonloader/config/'..path_last_stay_helper) then 
-	inicfg.save(main_ini, path_last_stay_helper)
-else
-	inicfg.save(main_ini, path_last_stay_helper)
-end
+inicfg.save(main_ini, path_last_stay_helper)
 
 local have_update = main_ini.update.updated_script
 
