@@ -107,6 +107,8 @@ if enable_autoupdate then
 		                                    goupdatestatus = true
 		                                    have_update = true
 		                                    main_ini.update.updated_script = true
+		                                    print("Have update is set to true")
+		                                    print(have_update)
 		                                    inicfg.save(main_ini, path_last_stay_helper)
 		                                    lua_thread.create(function()
 		                                        wait(500)
@@ -262,6 +264,8 @@ function main()
 		end
 	else
 		have_update = false
+		main_ini.update.updated_script = false
+		inicfg.save(main_ini, path_last_stay_helper)
 	end
 
 	for i = 1, #server_items do
