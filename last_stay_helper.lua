@@ -33,54 +33,56 @@ local DIALOG_INVENTORY_ID =	187
 
 -- Load Inicfg
 
-local inicfg = require('inicfg')
+lua_thread.create(function()
+    inicfg = require('inicfg')
 
-local path_last_stay_helper = 'last_stay_helper.ini'
+	path_last_stay_helper = 'last_stay_helper.ini'
 
-local main_ini = inicfg.load({
-	items_categories =
-	{
-		dry_food = true,
-		fry_meat = true,
-		raw_meat = true,
-		pizza = true,
-		burger = true,
-		apple = true,
-		can_of_beans = true,
-		semi_fished_products = true,
-		bottle = true,
-		sprunk = true,
-		apple_juice = true,
-		orange_juice = true,
-		milk = true,
+    main_ini = inicfg.load({
+		items_categories =
+		{
+			dry_food = true,
+			fry_meat = true,
+			raw_meat = true,
+			pizza = true,
+			burger = true,
+			apple = true,
+			can_of_beans = true,
+			semi_fished_products = true,
+			bottle = true,
+			sprunk = true,
+			apple_juice = true,
+			orange_juice = true,
+			milk = true,
 
-		crowbar = true,
-		fuelcan = true,
-		spare_parts = true,
-		battery = true,
-		wheel = true,
-		chainsaw = true,
+			crowbar = true,
+			fuelcan = true,
+			spare_parts = true,
+			battery = true,
+			wheel = true,
+			chainsaw = true,
 
-		code_lock = true,
-		red_fire = true,
-		storage = true
-	},
-	settings = 
-	{
-		draw_distance_items = MAX_DRAW_DISTANCE_ITEMS,
-		draw_font_size = MIN_DRAW_FONT_SIZE,
-		draw_font_color = DEFAULT_FONT_COLOR,
-		draw_items = true
-	},
-	update =
-	{	
-		updated_script = false
-	}
+			code_lock = true,
+			red_fire = true,
+			storage = true
+		},
+		settings = 
+		{
+			draw_distance_items = MAX_DRAW_DISTANCE_ITEMS,
+			draw_font_size = MIN_DRAW_FONT_SIZE,
+			draw_font_color = DEFAULT_FONT_COLOR,
+			draw_items = true
+		},
+		update =
+		{	
+			updated_script = false
+		}
 }, path_last_stay_helper)
 
 render_font_size = main_ini.settings.draw_font_size
 
 inicfg.save(main_ini, path_last_stay_helper)
+end)
 
 local have_update = main_ini.update.updated_script
 
@@ -111,17 +113,15 @@ if enable_autoupdate then
 		                        lua_thread.create(function(b)
 		                            local d = require('moonloader').download_status
 		                            local m = -1
-		                            sampAddChatMessage(b..'Обнаружено обновление. Скачиваем обновление '..updateversion, m)
+		                            sampAddChatMessage(b..'- Обнаружено обновление. Скачивается обновление '..updateversion, m)
 		                            update = true
 		                            wait(250)
 		                            downloadUrlToFile(updatelink, thisScript().path, function(n, o, p, q)
 		                                if o == d.STATUS_ENDDOWNLOADDATA then
-		                                    sampAddChatMessage(b..'Обновление скрипта успешно завершено!', m)
+		                                    sampAddChatMessage(b..'- Обновление скрипта успешно завершено!', m)
 		                                    goupdatestatus = true
 		                                    have_update = true
 		                                    main_ini.update.updated_script = true
-		                                    print("Have update is set to true")
-		                                    print(have_update)
 		                                    inicfg.save(main_ini, path_last_stay_helper)
 		                                    lua_thread.create(function()
 		                                        wait(500)
@@ -130,7 +130,7 @@ if enable_autoupdate then
 		                                end
 		                                if o == d.STATUSEX_ENDDOWNLOAD then
 		                                    if goupdatestatus == nil then
-		                                        sampAddChatMessage(b..'Не удалось обновить скрипта на версию скрипта '..updateversion..'. Запускаем старую версию скрипта!', m)
+		                                        sampAddChatMessage(b..'- Не удалось обновить скрипта на версию скрипта '..updateversion..'. Запускаем старую версию скрипта!', m)
 		                                        update = false
 		                                    end
 		                                end
@@ -257,12 +257,15 @@ function main()
     end
 
     if have_update == false then
-		if not sampIsLocalPlayerSpawned() then
-			sampAddChatMessage("{FFFF55}[LastStayHelper]{FFFFFF} - Скрипт загружен!", -1)
-		else
+		if sampIsLocalPlayerSpawned() then
 			sampAddChatMessage("{FFFF55}[LastStayHelper]{FFFFFF} - Скрипт перезагружен!", -1)
 		end
 	else
+
+		if not sampIsLocalPlayerSpawned() then
+			sampAddChatMessage("{FFFF55}[LastStayHelper]{FFFFFF} - Скрипт загружен!", -1)
+		end
+
 		have_update = false
 		main_ini.update.updated_script = false
 		inicfg.save(main_ini, path_last_stay_helper)
