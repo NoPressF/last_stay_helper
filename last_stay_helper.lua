@@ -3,6 +3,16 @@ script_author("NoPressF")
 script_url("https://github.com/NoPressF/last_stay_helper")
 script_version("V1.0")
 
+require "lib.moonloader"
+require "lib.sampfuncs"
+local hook = require('lib.samp.events')
+local imgui = require('imgui')
+local key = require('vkeys')
+local game_keys = require('game.keys')
+local encoding = require('encoding')
+encoding.default = 'CP1251'
+u8 = encoding.UTF8
+
 local enable_autoupdate = true
 local autoupdate_loaded = false
 local Update = nil
@@ -152,9 +162,6 @@ if enable_autoupdate then
     end
 end
 
-require "lib.moonloader"
-require "lib.sampfuncs"
-
 font_name = 'Calibri'
 font_size = 13
 font_flags = 13
@@ -166,14 +173,6 @@ render_font_flags = 13
 health_vehicle_font_name = 'Arial'
 health_vehicle_font_size = 12
 health_vehicle_font_flags = 13
-
-local hook = require('lib.samp.events')
-local imgui = require('imgui')
-local key = require('vkeys')
-local game_keys = require "game.keys"
-local encoding = require('encoding')
-encoding.default = 'CP1251'
-u8 = encoding.UTF8
 
 -- Count (Zombies, Players, Vehicles)
 
@@ -256,7 +255,6 @@ function main()
     end
 
     if have_update == false then
-
 		if not sampIsLocalPlayerSpawned() then
 			sampAddChatMessage("{FFFF55}[LastStayHelper]{FFFFFF} - Скрипт загружен!", -1)
 		else
