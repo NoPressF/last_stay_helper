@@ -18,6 +18,19 @@ local autoupdate_loaded = false
 local Update = nil
 local update = false
 
+-- Constants
+
+local MIN_DRAW_DISTANCE_ITEMS = 10
+local MAX_DRAW_DISTANCE_ITEMS = 70
+
+local MIN_DRAW_FONT_SIZE = 8
+local MAX_DRAW_FONT_SIZE = 15
+
+local DEFAULT_FONT_COLOR = 0xFFFFFF00
+
+local DIALOG_USE_ITEM_ID = 100
+local DIALOG_INVENTORY_ID =	187
+
 -- Load Inicfg
 
 local inicfg = require('inicfg')
@@ -190,19 +203,6 @@ local server_items = {
 }
 
 --local reasons = {"Кулак", "Кастет", "Клюшка для гольфа", "Полицейская дубинка", "Нож", "Бейсбольная бита", "Лопата", "Кий", "Кий", "Катана", "Бензопила", "Большой дилдо", "Малый дилдо", "Большой вибратор", "Малый вибратор", "Цветы", "Трость", "Граната", "Слезоточивый газ", "Коктейль молотова", "Colt .45", "Colt .45 (глушитель)", "Desert Eagle", "Shotgun", "Sawed Off", "Combat Shotgun", "Uzi", "MP5", "AK-47", "M4", "Tec-9", "Country Rifle", "Sniper Rifle", "RPG", "RPG (HeatSeeker)", "Flamethrower", "Minigun", "Satchel", "Detonator", "SprayCan", "Vehicle"}
-
--- Constants
-
-local MIN_DRAW_DISTANCE_ITEMS = 10
-local MAX_DRAW_DISTANCE_ITEMS = 70
-
-local MIN_DRAW_FONT_SIZE = 8
-local MAX_DRAW_FONT_SIZE = 15
-
-local DEFAULT_FONT_COLOR = 0xFFFFFF00
-
-local DIALOG_USE_ITEM_ID = 100
-local DIALOG_INVENTORY_ID =	187
 
 -- Objects ImGUI
 
