@@ -1,7 +1,7 @@
 script_name("last_stay_helper")
 script_author("NoPressF")
 script_url("https://github.com/NoPressF/last_stay_helper")
-script_version("V1.0")
+script_version("V1.1")
 
 local enable_autoupdate = true
 local autoupdate_loaded = false
@@ -9,6 +9,8 @@ local Update = nil
 local update = false
 
 -- Load Inicfg
+
+local inicfg = require('inicfg')
 
 local path_last_stay_helper = 'last_stay_helper.ini'
 
@@ -173,7 +175,6 @@ local hook = require('lib.samp.events')
 local imgui = require('imgui')
 local key = require('vkeys')
 local game_keys = require "game.keys"
-local inicfg = require('inicfg')
 local encoding = require('encoding')
 encoding.default = 'CP1251'
 u8 = encoding.UTF8
