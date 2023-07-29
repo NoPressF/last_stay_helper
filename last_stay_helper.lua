@@ -1,7 +1,7 @@
 script_name("last_stay_helper")
 script_author("NoPressF")
 script_url("https://github.com/NoPressF/last_stay_helper")
-script_version("V1.0")
+script_version("V1.1")
 
 local enable_autoupdate = true
 local autoupdate_loaded = false
@@ -100,7 +100,7 @@ if enable_autoupdate then
 		                                    sampAddChatMessage(b..'Обновление скрипта успешно завершено!', m)
 		                                    goupdatestatus = true
 		                                    have_update = true
-		                                    main_ini.update.have_update = true
+		                                    main_ini.update.updated_script = true
 		                                    inicfg.save(main_ini, path_last_stay_helper)
 		                                    lua_thread.create(function()
 		                                        wait(500)
